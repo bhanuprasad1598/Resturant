@@ -39,3 +39,8 @@
   border: none;
   outline: none;
 }
+.cart-image {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}

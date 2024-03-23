@@ -1,5 +1,10 @@
 import {useState} from 'react'
-import {Switch, Route, Redirect} from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 
 import Home from './components/Home'
 import Login from './components/Login'
@@ -58,26 +63,28 @@ const App = () => {
   }
 
   return (
-    <CartContext.Provider
-      value={{
-        cartList,
-        addCartItem,
-        removeCartItem,
-        incrementCartItemQuantity,
-        decrementCartItemQuantity,
-        removeAllCartItems,
-        restaurantName,
-        setRestaurantName,
-      }}
-    >
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        <ProtectedRoute exact path="/" component={Home} />
-        <ProtectedRoute exact path="/cart" component={Cart} />
-        <Route exact path="/not-found" component={NotFound} />
-        <Redirect />
-      </Switch>
-    </CartContext.Provider>
+    <Router>
+      <CartContext.Provider
+        value={{
+          cartList,
+          addCartItem,
+          removeCartItem,
+          incrementCartItemQuantity,
+          decrementCartItemQuantity,
+          removeAllCartItems,
+          restaurantName,
+          setRestaurantName,
+        }}
+      >
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/cart" component={Cart} />
+          <Route exact path="/not-found" component={NotFound} />
+          <Redirect to="not-found" />
+        </Switch>
+      </CartContext.Provider>
+    </Router>
   )
 }
 
